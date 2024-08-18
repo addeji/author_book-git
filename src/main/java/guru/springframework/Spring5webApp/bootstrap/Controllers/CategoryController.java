@@ -1,24 +1,51 @@
 package guru.springframework.Spring5webApp.bootstrap.Controllers;
 
 
+import guru.springframework.Spring5webApp.domain.Book;
+import guru.springframework.Spring5webApp.domain.Category;
 import guru.springframework.Spring5webApp.repositories.CategoryRepository;
-import org.springframework.stereotype.Controller;
+import guru.springframework.Spring5webApp.services.CategoryService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+import java.util.List;
+
+@RequiredArgsConstructor
+@RestController
+@RequestMapping("/api/categories")
 public class CategoryController {
     private final CategoryRepository categoryRepository;
 
-    public CategoryController(CategoryRepository categoryRepository) {
-        this.categoryRepository = categoryRepository;
+    @Autowired
+    private CategoryService categoryService;
+
+    @GetMapping
+    public List<Category> getAllCategories() {
+        return categoryService.getAllCategories();
     }
 
-    @RequestMapping("/category")
-    public  String getCategory(Model model){
+    @GetMapping("/category-count")
+    public Long getCategoryCount() {return categoryRepository.count();}
 
-        model.addAttribute("category",categoryRepository.findAll());
+    @GetMapping("/category-names")
+    public ResponseEntity<List<String>> getCategoryNames() {
+        List<Category> category = (List<Category>) categoryRepository.findAll();
+        List<String> categoryNames = category.stream()  //gets the names of
+                // the book and puts them in a list
+                .map(Category::getCategory)
+                .toList();
+        return ResponseEntity.ok(categoryNames);
+    }
+    @PostMapping("/add")
+    public Category addCategory(@RequestBody Category category) {
+        return categoryService.addCategory(category);
+    }
 
-        return "category/index";
+    @DeleteMapping("/{id}")
+    public void deleteCategory(@PathVariable Long id) {
+        categoryService.deleteCategory(id);
     }
 }

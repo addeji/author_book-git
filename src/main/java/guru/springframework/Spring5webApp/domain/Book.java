@@ -1,12 +1,17 @@
 package guru.springframework.Spring5webApp.domain;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity(name = "book")
 public class Book {
 
@@ -14,73 +19,29 @@ public class Book {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @EqualsAndHashCode.Include
     private Long id;
     private String Bookname;
     private String isbn;
     @ManyToOne
     private Publishers publishers;
 
+    @ManyToMany
+    @JoinTable(name = "author_book", joinColumns =
+    @JoinColumn(name = "book_id"), inverseJoinColumns =
+    @JoinColumn(name = "author_id"))
+    private Set<Author> authors = new HashSet<>();
     @ManyToOne
     @JoinColumn(name = "category_id")
-    private Category categories ;
+    private Category category;
 
 
-
-    public void setCategories(Category categories) {
-        this.categories = categories;
-    }
-
-    public Category getCategories() {
-        return categories;
-    }
-
-    @ManyToMany
-    @JoinTable(name = "author_book" , joinColumns = @JoinColumn(name = "book_id")
-            , inverseJoinColumns = @JoinColumn(name = "author_id"))
-    private Set<Author> authors = new HashSet<>();
-
-
-    public Book() {
-    }
-
+//
     public Book(String bookname, String isbn) {
         Bookname = bookname;
         this.isbn = isbn;
 
     }
 
-
-    public void setPublishers(Publishers publishers) {
-        this.publishers = publishers;
-    }
-    @Override
-    public String toString() {
-        return "Book{" +
-                "id=" + id +
-                ", Bookname='" + Bookname + '\'' +
-                ", isbn='" + isbn + '\'' +'}';
-    }
-
-
-    public Set<Author> getAuthors() {
-        return authors;
-    }
-
-
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Book book = (Book) o;
-        return Objects.equals(id, book.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(id);
-    }
-    
 
 }

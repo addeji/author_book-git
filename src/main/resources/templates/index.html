@@ -2,10 +2,15 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>SpringFramework Guru</title>
+    <title>List of Vet</title>
 </head>
 <body>
-<h1>BookList</h1>
+
+
+<h2 th:text="'Book List'">Book List</h2>
+
+
+
 <table>
     <tr>
         <th>ID</th>
@@ -13,10 +18,10 @@
         <th>Publisher</th>
         <th>Author</th>
     </tr>
-    <tr th:each="book : ${books}">
-        <td th:text = "${book.id}">123</td>
-        <td th:text = "${book.title}">Spring in action</td>
-        <td th:text = "${book.publisher.name}">Wrox</td>
+    <tr th:each="book:${book}">
+        <td th:text = "${book?.id}">123</td>
+        <td th:text = "${book?.title}">Spring in action</td>
+        <td th:text = "${book?.publisher.name}">Wrox</td>
     </tr>
 
 </table>
