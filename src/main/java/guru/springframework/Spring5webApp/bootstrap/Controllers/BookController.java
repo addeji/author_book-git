@@ -42,46 +42,8 @@ public class BookController {
 
 
 
-//    @GetMapping("/index")
-//        public  String getBooksTemplate(Model model){
-//
-//        model.addAttribute("book",bookRepository.findAll());
-//
-//        return bookRepository.findAll().toString();
-//    }
-//
+
     @GetMapping("/book-count")
     public Long getBookCount() {return bookRepository.count();}
-//
-//    @GetMapping("/book-names")
-//    public ResponseEntity<List<String>> getBookNames() {
-//        List<Book> books = (List<Book>) bookRepository.findAll();
-//        List<String> bookNames = books.stream()  //gets the names of
-//                // the book and puts them in a list
-//                .map(Book::getBookname)
-//                .toList();
-//        return ResponseEntity.ok(bookNames);
-//    }
-//
-//
-//    @PostMapping("/add-book")
-//    public ResponseEntity<Book> addBook(@RequestBody Book book) {
-//        Book newBook = bookRepository.save(book);
-//        return ResponseEntity.ok(newBook);
-//    }
-//    @DeleteMapping("/delete-book/{bookId}")
-//    public ResponseEntity<String> deleteBook(@PathVariable Long bookId) {
-//        bookRepository.deleteById(bookId);
-//        return ResponseEntity.ok("Book deleted successfully");
-//    }
-//    @PutMapping("/update-book/{bookId}")
-//    public ResponseEntity<Book> updateBook(@PathVariable Long bookId, @RequestBody Book updatedBook) {
-//        Book book = bookRepository.findById(bookId).orElseThrow();
-//        book.setBookname(updatedBook.getBookname());
-//        book.setAuthors(updatedBook.getAuthors());
-//        // Update other book fields as needed
-//        Book updatedBookEntity = bookRepository.save(book);
-//        return ResponseEntity.ok(updatedBookEntity);
-//    }
 
 }
