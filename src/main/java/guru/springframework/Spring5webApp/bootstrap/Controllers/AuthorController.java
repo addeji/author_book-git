@@ -14,7 +14,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/authors")
+@RequestMapping("/authors")
 public class AuthorController {
     private final AuthorRepository authorRepository;
 
