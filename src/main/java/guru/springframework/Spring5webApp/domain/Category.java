@@ -20,7 +20,7 @@ public class Category {
     @EqualsAndHashCode.Include
     private Long id;
     private String Category;
-    @OneToMany(mappedBy = "category")
+    @ManyToMany(mappedBy = "category")
     private Set<Book> books = new HashSet<>();
 
 

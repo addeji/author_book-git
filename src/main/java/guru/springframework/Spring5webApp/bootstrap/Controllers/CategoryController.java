@@ -1,14 +1,12 @@
 package guru.springframework.Spring5webApp.bootstrap.Controllers;
 
 
-import guru.springframework.Spring5webApp.domain.Book;
 import guru.springframework.Spring5webApp.domain.Category;
 import guru.springframework.Spring5webApp.repositories.CategoryRepository;
 import guru.springframework.Spring5webApp.services.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

@@ -5,14 +5,10 @@ import guru.springframework.Spring5webApp.repositories.BookRepository;
 import guru.springframework.Spring5webApp.services.BookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController
@@ -23,14 +19,14 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
-    @GetMapping("/get-books")
+    @GetMapping
     public List<Book> getAllBooks() {
         return bookService.getAllBooks();
 
 
     }
 
-    @PostMapping("/add")
+    @PostMapping
     public Book addBook(@RequestBody Book book) {
         return bookService.addBook(book);
     }

@@ -31,9 +31,10 @@ public class Book {
     @JoinColumn(name = "book_id"), inverseJoinColumns =
     @JoinColumn(name = "author_id"))
     private Set<Author> authors = new HashSet<>();
-    @ManyToOne
-    @JoinColumn(name = "category_id")
-    private Category category;
+    @ManyToMany
+    @JoinTable(name = "category_book",joinColumns = @JoinColumn(name = "book_id" )
+            ,inverseJoinColumns = @JoinColumn(name = "category_id"))
+    private Set<Category> category;
 
 
 //
