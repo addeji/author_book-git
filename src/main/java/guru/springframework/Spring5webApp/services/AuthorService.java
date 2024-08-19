@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
 @Service
 public class AuthorService {
     @Autowired
@@ -19,6 +20,15 @@ public class AuthorService {
     public Author addAuthor(Author author) {
         return authorRepository.save(author);
     }
+
+    public Author editAuthorName(Long authorId, String newName) {
+        Author author = authorRepository.findById(authorId).orElseThrow();
+        author.setAuthorName(newName);
+        return authorRepository.save(author);
+    }
+
+
+
 
     public void deleteAuthor(Long id) {
         authorRepository.deleteById(id);

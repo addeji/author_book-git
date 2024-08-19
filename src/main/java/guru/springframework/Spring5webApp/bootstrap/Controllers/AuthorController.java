@@ -41,6 +41,11 @@ public class AuthorController {
         return ResponseEntity.ok(newAuthor);
     }
 
+    @PutMapping("/{id}")
+    public Author editAuthorName(@PathVariable Long id, @RequestBody Author author) {
+        return authorService.editAuthorName(id, author.getAuthorName());
+    }
+
 
 
 

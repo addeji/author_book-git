@@ -18,17 +18,12 @@ public class Author {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @EqualsAndHashCode.Include
     private Long id;
-    private String firstName;
-    private String lastName;
+    private String AuthorName;
     @ManyToMany(mappedBy = "authors",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private Set<Book> books = new HashSet<>();
 
 
-    public Author(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
 
-    }
 
     }
 

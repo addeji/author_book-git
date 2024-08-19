@@ -1,6 +1,8 @@
 package guru.springframework.Spring5webApp.bootstrap.Controllers;
 
+import guru.springframework.Spring5webApp.domain.Author;
 import guru.springframework.Spring5webApp.domain.Book;
+import guru.springframework.Spring5webApp.domain.Publishers;
 import guru.springframework.Spring5webApp.repositories.BookRepository;
 import guru.springframework.Spring5webApp.services.BookService;
 import lombok.RequiredArgsConstructor;
@@ -41,5 +43,10 @@ public class BookController {
 
     @GetMapping("/book-count")
     public Long getBookCount() {return bookRepository.count();}
+
+    @PutMapping("/edit/{id}")
+    public Book editBookName(@PathVariable Long id, @RequestBody  Book book) {
+        return bookService.editBookName(id, book.getBookname());
+    }
 
 }

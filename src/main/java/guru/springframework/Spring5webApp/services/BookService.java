@@ -1,7 +1,9 @@
 package guru.springframework.Spring5webApp.services;
 
 
+import guru.springframework.Spring5webApp.domain.Author;
 import guru.springframework.Spring5webApp.domain.Book;
+import guru.springframework.Spring5webApp.domain.Publishers;
 import guru.springframework.Spring5webApp.repositories.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,5 +28,10 @@ public class BookService {
 
     public void deleteBook(Long id) {
         bookRepository.deleteById(id);
+    }
+    public Book editBookName(Long bookId, String newName) {
+        Book book = bookRepository.findById(bookId).orElseThrow();
+        book.setBookname(newName);
+        return bookRepository.save(book);
     }
 }
