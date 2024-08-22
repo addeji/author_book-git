@@ -3,7 +3,7 @@ package guru.springframework.Spring5webApp.bootstrap.Controllers;
 
 import guru.springframework.Spring5webApp.domain.Category;
 import guru.springframework.Spring5webApp.repositories.CategoryRepository;
-import guru.springframework.Spring5webApp.services.CategoryService;
+import guru.springframework.Spring5webApp.services.Impl.CategoryServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +18,7 @@ public class CategoryController {
     private final CategoryRepository categoryRepository;
 
     @Autowired
-    private CategoryService categoryService;
+    private CategoryServiceImpl categoryService;
 
     @GetMapping
     public List<Category> getAllCategories() {

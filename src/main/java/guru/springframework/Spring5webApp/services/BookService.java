@@ -1,37 +1,27 @@
 package guru.springframework.Spring5webApp.services;
 
-
-import guru.springframework.Spring5webApp.domain.Author;
 import guru.springframework.Spring5webApp.domain.Book;
-import guru.springframework.Spring5webApp.domain.Publishers;
-import guru.springframework.Spring5webApp.repositories.BookRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
+
 
 import java.util.List;
 
+public interface BookService {
 
-@Service
-public class BookService {
-    @Autowired
-    private BookRepository bookRepository;
+    default List<Book> getAllBooks() {
 
-    public List<Book> getAllBooks() {
-        List<Book> bookNames = (List<Book>) bookRepository.findAll();
-        return ResponseEntity.ok(bookNames).getBody();
+        return List.of();
     }
 
-    public Book addBook(Book book) {
-        return bookRepository.save(book);
+   default Book addBook(Book book) {
+
+        return book;
     }
 
-    public void deleteBook(Long id) {
-        bookRepository.deleteById(id);
+  default void deleteBook(Long id) {
+
     }
-    public Book editBookName(Long bookId, String newName) {
-        Book book = bookRepository.findById(bookId).orElseThrow();
-        book.setBookname(newName);
-        return bookRepository.save(book);
+     default Book editBookName(Long bookId, String newName) {
+
+        return null;
     }
 }

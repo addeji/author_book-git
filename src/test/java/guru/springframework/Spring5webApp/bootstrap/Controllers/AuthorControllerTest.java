@@ -1,6 +1,6 @@
 package guru.springframework.Spring5webApp.bootstrap.Controllers;
 
-import guru.springframework.Spring5webApp.services.AuthorService;
+import guru.springframework.Spring5webApp.services.Impl.AuthorServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -17,7 +17,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class AuthorControllerTest {
 
     @MockBean
-    AuthorService authorService;
+    AuthorServiceImpl authorService;
     @Autowired
     private MockMvc mockMvc;
     @Autowired

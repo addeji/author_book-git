@@ -1,28 +1,21 @@
 package guru.springframework.Spring5webApp.services;
 
-
 import guru.springframework.Spring5webApp.domain.Category;
-import guru.springframework.Spring5webApp.repositories.CategoryRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+public interface CategoryService {
+    public default List<Category> getAllCategories() {
 
-@Service
-public class CategoryService {
-    @Autowired
-    private CategoryRepository categoryRepository;
-
-    public List<Category> getAllCategories() {
-        return (List<Category>) categoryRepository.findAll();
+        return List.of();
     }
 
-    public Category addCategory(Category category) {
-        return categoryRepository.save(category);
+    public default Category addCategory(Category category) {
+
+        return category;
     }
 
-    public void deleteCategory(Long id) {
-        categoryRepository.deleteById(id);
+    public default void deleteCategory(Long id) {
+
     }
 }
