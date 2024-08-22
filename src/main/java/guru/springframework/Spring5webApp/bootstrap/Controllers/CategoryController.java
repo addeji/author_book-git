@@ -33,7 +33,7 @@ public class CategoryController {
         List<Category> category = (List<Category>) categoryRepository.findAll();
         List<String> categoryNames = category.stream()  //gets the names of
                 // the book and puts them in a list
-                .map(Category::getCategory)
+                .map(Category::getCategoryName)
                 .toList();
         return ResponseEntity.ok(categoryNames);
     }

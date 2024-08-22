@@ -4,6 +4,7 @@ import guru.springframework.Spring5webApp.domain.Author;
 
 
 import java.util.List;
+import java.util.UUID;
 
 
 public interface AuthorService {
@@ -19,5 +20,6 @@ public interface AuthorService {
 
 
      default void deleteAuthor(Long id) {}
+
 
 }

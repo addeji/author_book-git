@@ -19,16 +19,13 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @EqualsAndHashCode.Include
     private Long id;
-    private String Category;
+    private String CategoryName;
     @ManyToMany(mappedBy = "category")
     private Set<Book> books = new HashSet<>();
 
 
-
-
-
     public Category(String Category) {
-        this.Category = Category;
+        this.CategoryName = Category;
     }
 
 }
