@@ -17,6 +17,10 @@ import java.util.List;
 @RequestMapping("/authors")
 public class AuthorController {
     private final AuthorRepository authorRepository;
+    private static final String AUTHOR_GET = "/authors";
+    private static final String AUTHOR_GET_ID = AUTHOR_GET + "/{id}";
+    private static final String AUTHOR_DELETE_ID = "/delete/{id}";
+    private static final String AUTHOR_ADD = AUTHOR_GET + "/add";
 
 
 
@@ -24,24 +28,24 @@ public class AuthorController {
     @Autowired
     private AuthorService authorService;
 
-    @GetMapping
+    @GetMapping(AUTHOR_GET)
     public List<Author> getAllAuthors() {
         return authorService.getAllAuthors();
     }
 
 
-    @DeleteMapping("delete/{id}")
+    @DeleteMapping(AUTHOR_DELETE_ID)
     public void deleteAuthor(@PathVariable Long id) {
         authorService.deleteAuthor(id);
     }
 
-    @PostMapping("/add-author")
+    @PostMapping(AUTHOR_ADD)
     public ResponseEntity<Author> addAuthor(@RequestBody Author author) {
         Author newAuthor = authorRepository.save(author);
         return ResponseEntity.ok(newAuthor);
     }
 
-    @PutMapping("{id}")
+    @PutMapping(AUTHOR_GET_ID)
     public Author editAuthorName(@PathVariable Long id, @RequestBody Author author) {
         return authorService.editAuthorName(id, author.getAuthorName());
     }
