@@ -30,7 +30,7 @@ public class AuthorController {
     }
 
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("delete/{id}")
     public void deleteAuthor(@PathVariable Long id) {
         authorService.deleteAuthor(id);
     }
@@ -41,7 +41,7 @@ public class AuthorController {
         return ResponseEntity.ok(newAuthor);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("{id}")
     public Author editAuthorName(@PathVariable Long id, @RequestBody Author author) {
         return authorService.editAuthorName(id, author.getAuthorName());
     }

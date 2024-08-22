@@ -33,7 +33,7 @@ public class BookController {
         return bookService.addBook(book);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("{id}")
     public void deleteBook(@PathVariable Long id) {
         bookService.deleteBook(id);
     }
@@ -44,7 +44,7 @@ public class BookController {
     @GetMapping("/book-count")
     public Long getBookCount() {return bookRepository.count();}
 
-    @PutMapping("/edit/{id}")
+    @PutMapping("edit/{id}")
     public Book editBookName(@PathVariable Long id, @RequestBody  Book book) {
         return bookService.editBookName(id, book.getBookname());
     }
