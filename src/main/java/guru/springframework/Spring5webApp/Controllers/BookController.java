@@ -1,10 +1,10 @@
-package guru.springframework.Spring5webApp.bootstrap.Controllers;
+package guru.springframework.Spring5webApp.Controllers;
 
 import guru.springframework.Spring5webApp.domain.Book;
 import guru.springframework.Spring5webApp.repositories.BookRepository;
-import guru.springframework.Spring5webApp.services.Impl.BookServiceImpl;
+import guru.springframework.Spring5webApp.services.BookService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+
 
 import org.springframework.web.bind.annotation.*;
 
@@ -16,14 +16,13 @@ import java.util.List;
 public class BookController {
 
     private final BookRepository bookRepository;
-    @Autowired
-    private BookServiceImpl bookService;
-    @Autowired
-    private BookServiceImpl bookServiceImpl;
+
+    private final BookService bookService;
+
 
     @GetMapping
     public List<Book> getAllBooks() {
-        return bookServiceImpl.getAllBooks();
+        return bookService.getAllBooks();
 
 
     }

@@ -1,13 +1,10 @@
-package guru.springframework.Spring5webApp.bootstrap.Controllers;
+package guru.springframework.Spring5webApp.Controllers;
 
 import guru.springframework.Spring5webApp.domain.Author;
 import guru.springframework.Spring5webApp.repositories.AuthorRepository;
-
-import guru.springframework.Spring5webApp.services.Impl.AuthorServiceImpl;
+import guru.springframework.Spring5webApp.services.AuthorService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -21,14 +18,13 @@ public class AuthorController {
 
 
 
-    @Autowired
-    private AuthorServiceImpl authorService;
-    @Autowired
-    private AuthorServiceImpl authorServiceImpl;
+
+    private final AuthorService authorService;
+
 
     @GetMapping
     public List<Author> getAllAuthors() {
-        return authorServiceImpl.getAllAuthors();
+        return authorService.getAllAuthors();
     }
 
 

@@ -1,4 +1,4 @@
-package guru.springframework.Spring5webApp.bootstrap.Controllers;
+package guru.springframework.Spring5webApp.exceptions;
 
 public class NewException extends RuntimeException{
     public NewException() {

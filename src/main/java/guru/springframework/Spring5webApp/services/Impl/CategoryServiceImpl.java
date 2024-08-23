@@ -22,12 +22,12 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     public Category addCategory(Category category) {
-        log.info("addCategory" + category);
+        log.info("addedCategory" + category);
         return categoryRepository.save(category);
     }
 
     public void deleteCategory(Long id) {
-        log.info("deleteCategory" + id);
+        log.info("deletedCategory" + id);
         categoryRepository.deleteById(id);
     }
 }
