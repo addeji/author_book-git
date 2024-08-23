@@ -5,17 +5,8 @@ import guru.springframework.Spring5webApp.domain.Category;
 import java.util.List;
 
 public interface CategoryService {
-    public default List<Category> getAllCategories() {
+    List<Category> getAllCategories() ;
+     Category addCategory(Category category);
 
-        return List.of();
-    }
-
-    public default Category addCategory(Category category) {
-
-        return category;
-    }
-
-    public default void deleteCategory(Long id) {
-
-    }
+    void deleteCategory(Long id) ;
 }

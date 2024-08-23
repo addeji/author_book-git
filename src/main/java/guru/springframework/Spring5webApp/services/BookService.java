@@ -7,21 +7,11 @@ import java.util.List;
 
 public interface BookService {
 
-    default List<Book> getAllBooks() {
+     List<Book> getAllBooks();
 
-        return List.of();
-    }
+    Book addBook(Book book);
 
-   default Book addBook(Book book) {
+   void deleteBook(Long id) ;
 
-        return book;
-    }
-
-  default void deleteBook(Long id) {
-
-    }
-     default Book editBookName(Long bookId, String newName) {
-
-        return null;
-    }
+    Book editBookName(Long bookId, String newName) ;
 }

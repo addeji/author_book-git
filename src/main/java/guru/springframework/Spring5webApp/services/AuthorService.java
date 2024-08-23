@@ -4,22 +4,20 @@ import guru.springframework.Spring5webApp.domain.Author;
 
 
 import java.util.List;
-import java.util.UUID;
+
 
 
 public interface AuthorService {
 
 
-     default List<Author> getAllAuthors() {return List.of();}
+      List<Author> getAllAuthors() ;
 
-     default Author addAuthor(Author author) {return author;}
+      Author addAuthor(Author author) ;
 
-     default Author editAuthorName(Long authorId, String newName) {
-         return null;
-     }
+    Author editAuthorName(Long authorId, String newName);
 
 
-     default void deleteAuthor(Long id) {}
+      void deleteAuthor(Long id) ;
 
 
 }
