@@ -15,19 +15,21 @@ import java.util.List;
 public class CategoryServiceImpl implements CategoryService {
     @Autowired
     private CategoryRepository categoryRepository;
-
+    @Override
     public List<Category> getAllCategories() {
         log.info("getAllCategories");
         return  categoryRepository.findAll();
     }
-
+    @Override
     public Category addCategory(Category category) {
-        log.info("addedCategory" + category);
+        log.info("addedCategory{}", category);
         return categoryRepository.save(category);
     }
-
+    @Override
     public void deleteCategory(Long id) {
-        log.info("deletedCategory" + id);
+        log.info("deletedCategory{}", id);
         categoryRepository.deleteById(id);
     }
+    @Override
+    public Long getCategoryCount() {return categoryRepository.count();}
 }

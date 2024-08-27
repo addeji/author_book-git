@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 
@@ -24,22 +23,21 @@ public class Book {
     private String Bookname;
     private String isbn;
     @ManyToOne
-    private Publishers publishers;
+    private Publisher publisher;
 
-    @ManyToMany
+    @ManyToOne
     @JoinTable(name = "author_book", joinColumns =
     @JoinColumn(name = "book_id"), inverseJoinColumns =
     @JoinColumn(name = "author_id"))
-    private Set<Author> authors = new HashSet<>();
+    private Author author ;
     @ManyToMany
-    @JoinTable(name = "category_book",joinColumns = @JoinColumn(name = "book_id" )
-            ,inverseJoinColumns = @JoinColumn(name = "category_id"))
-    private Set<Category> category;
+    @JoinTable(name = "book_category",joinColumns = @JoinColumn(name = "book_id" )
+            ,inverseJoinColumns = @JoinColumn(name = "category"))
+    private Set<Category> category= new HashSet<>();
 
 
-//
     public Book(String bookname, String isbn) {
-        Bookname = bookname;
+        this.Bookname = bookname;
         this.isbn = isbn;
 
     }

@@ -3,7 +3,7 @@
 //import guru.springframework.Spring5webApp.domain.Author;
 //import guru.springframework.Spring5webApp.domain.Book;
 //import guru.springframework.Spring5webApp.domain.Category;
-//import guru.springframework.Spring5webApp.domain.Publishers;
+//import guru.springframework.Spring5webApp.domain.Publisher;
 //import guru.springframework.Spring5webApp.repositories.AuthorRepository;
 //import guru.springframework.Spring5webApp.repositories.BookRepository;
 //
@@ -35,7 +35,7 @@
 //    @Override
 //    public void run(String... args) throws Exception {
 //        System.out.println("Started in BootStrap");
-//        Publishers publishers = new Publishers();
+//        Publisher publishers = new Publisher();
 //        publishers.setPublisherName("Epic");
 //        publishers.setAddressline1("ikorodu,erunwen");
 //        publishers.setCity("Lagos");
@@ -59,7 +59,7 @@
 //
 //        eric.getBooks().add(Got);
 //        Got.getAuthors().add(eric);
-//        Got.setPublishers(publishers);
+//        Got.setPublisher(publishers);
 //        publishers.getBooks().add(Got);
 //
 //
@@ -72,7 +72,7 @@
 //        categoryRepository.save(category);
 //
 //
-//        Publishers publisher = new Publishers();
+//        Publisher publisher = new Publisher();
 //        publisher.setPublisherName("EA");
 //        publisher.setAddressline1("ikeja,mainland ,lagos");
 //        publisher.setCity("Lagos");
@@ -87,7 +87,7 @@
 //
 //        rod.getBooks().add(ToG);
 //        ToG.getAuthors().add(rod);
-//        ToG.setPublishers(publisher);
+//        ToG.setPublisher(publisher);
 //        publisher.getBooks().add(ToG);
 //
 //
@@ -104,7 +104,7 @@
 //        System.out.println("Total");
 //        System.out.println("Number of Books :" + bookRepository.count());
 //        System.out.println("Number of Authors :" + authorRepository.count());
-//        System.out.println(" Number of Publishers:" + publisherRepository.count());
+//        System.out.println(" Number of Publisher:" + publisherRepository.count());
 //
 //
 //

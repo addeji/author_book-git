@@ -1,11 +1,14 @@
 package guru.springframework.Spring5webApp.Controllers;
 
+import guru.springframework.Spring5webApp.Dto.BookDto;
+import guru.springframework.Spring5webApp.domain.Author;
 import guru.springframework.Spring5webApp.domain.Book;
 import guru.springframework.Spring5webApp.repositories.BookRepository;
 import guru.springframework.Spring5webApp.services.BookService;
 import lombok.RequiredArgsConstructor;
 
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,11 +29,23 @@ public class BookController {
 
 
     }
+    @GetMapping("/books/{id}")
+    public ResponseEntity<BookDto> getBookById(@PathVariable Long id) {
+        Book book = bookService.GetBookById(id);
+
+        if (book == null) {
+            return ResponseEntity.notFound().build();
+        }
+        BookDto bookDto = new BookDto(book.getId(), book.getBookname(), book.getIsbn());
+        bookDto.setAuthor(book.getAuthor());
+
+        return ResponseEntity.ok(bookDto);
+    }
 
     @PostMapping
-    public Book addBook(@RequestBody Book book) {
+    public Book addBook(@RequestBody Book book , Author author) {
 
-        return bookService.addBook(book);
+        return bookService.addBook(book ,author);
     }
 
     @DeleteMapping("{id}")
@@ -49,4 +64,7 @@ public class BookController {
         return bookService.editBookName(id, book.getBookname());
     }
 
-}
+
+
+    }
+

@@ -14,6 +14,8 @@ public interface AuthorService {
 
       Author addAuthor(Author author) ;
 
+    Author getAuthorById(Long id);
+
     Author editAuthorName(Long authorId, String newName);
 
 

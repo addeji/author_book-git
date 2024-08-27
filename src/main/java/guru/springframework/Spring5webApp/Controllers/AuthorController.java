@@ -1,5 +1,6 @@
 package guru.springframework.Spring5webApp.Controllers;
 
+import guru.springframework.Spring5webApp.Dto.AuthorDto;
 import guru.springframework.Spring5webApp.domain.Author;
 import guru.springframework.Spring5webApp.repositories.AuthorRepository;
 import guru.springframework.Spring5webApp.services.AuthorService;
@@ -13,7 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/authors")
 public class AuthorController {
-    private final AuthorRepository authorRepository;
+
 
 
 
@@ -35,15 +36,25 @@ public class AuthorController {
 
     @PostMapping("/add-author")
     public ResponseEntity<Author> addAuthor(@RequestBody Author author) {
-        Author newAuthor = authorRepository.save(author);
+        Author newAuthor = authorService.addAuthor(author);
         return ResponseEntity.ok(newAuthor);
     }
 
     @PutMapping("/{id}")
-    public Author editAuthorName(@PathVariable Long id, @RequestBody Author author) {
+    public Author editAuthorName(@PathVariable Long id, Author author) {
         return authorService.editAuthorName(id, author.getAuthorName());
     }
 
+    @GetMapping("/authors-ID/{id}")
+    public ResponseEntity<AuthorDto> getAuthorById(@PathVariable Long id) {
+        Author author = authorService.getAuthorById(id);
+        if (author == null) {return ResponseEntity.notFound().build();}
+
+        AuthorDto authorDto = new AuthorDto(author.getId(), author.getAuthorName());
+        authorDto.setBooks(author.getBooks());
+
+        return ResponseEntity.ok(authorDto);
+    }
 
 
 
