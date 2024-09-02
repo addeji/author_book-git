@@ -1,6 +1,8 @@
 package guru.springframework.Spring5webApp.services;
 
-import guru.springframework.Spring5webApp.domain.Author;
+import guru.springframework.Spring5webApp.Dto.AuthorDto;
+import guru.springframework.Spring5webApp.Dto.BookDto;
+
 
 
 import java.util.List;
@@ -10,16 +12,11 @@ import java.util.List;
 public interface AuthorService {
 
 
-      List<Author> getAllAuthors() ;
-
-      Author addAuthor(Author author) ;
-
-    Author getAuthorById(Long id);
-
-    Author editAuthorName(Long authorId, String newName);
-
-
-      void deleteAuthor(Long id) ;
+      List<AuthorDto> getAllAuthors() ;
+      AuthorDto addAuthor(AuthorDto authordto) ;
+    AuthorDto getAuthorById(Long id);
+    AuthorDto editAuthorName(Long authorId, AuthorDto authorDto);
+    void deleteAuthor(Long id) ;
 
 
 }

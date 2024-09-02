@@ -1,20 +1,16 @@
 package guru.springframework.Spring5webApp.services;
 
-import guru.springframework.Spring5webApp.domain.Author;
-import guru.springframework.Spring5webApp.domain.Book;
+import guru.springframework.Spring5webApp.Dto.BookDto;
+
 
 
 import java.util.List;
 
 public interface BookService {
 
-     List<Book> getAllBooks();
-
-    Book addBook(Book book , Author author);
-
-    Book GetBookById(Long id);
-
-   void deleteBook(Long id) ;
-
-    Book editBookName(Long bookId, String newName) ;
+    List<BookDto> getAllBooks();
+    BookDto getBookById(Long id);
+    BookDto addBook(BookDto bookDTO);
+    BookDto editBook(Long id, BookDto bookDTO);
+    void deleteBook(Long id);
 }

@@ -1,19 +1,17 @@
 package guru.springframework.Spring5webApp.services;
 
 
-import guru.springframework.Spring5webApp.domain.Book;
-import guru.springframework.Spring5webApp.domain.Publisher;
-
+import guru.springframework.Spring5webApp.Dto.PublisherDto;
 import java.util.List;
 
-
 public interface PublisherService {
+    
 
 
-    List<Publisher> getAllPublishers() ;
-    Publisher addPublisher(Publisher publisher, Book book);
-
-     Publisher getPublisherById(Long id);
-     void deletePublisher(Long id);
+    List<PublisherDto> getAllPublishers();
+    PublisherDto getPublisherById(Long id);
+    PublisherDto addPublisher(PublisherDto publisherDTO);
+    PublisherDto updatePublisher(Long id, PublisherDto publisherDTO);
+    void deletePublisher(Long id);
 
 }

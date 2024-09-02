@@ -1,10 +1,9 @@
 package guru.springframework.Spring5webApp.Controllers;
 
 
-import guru.springframework.Spring5webApp.domain.Category;
+import guru.springframework.Spring5webApp.Dto.CategoryDto;
 import guru.springframework.Spring5webApp.services.CategoryService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,26 +15,26 @@ public class CategoryController {
     private final CategoryService categoryService;
 
     @GetMapping
-    public List<Category> getAllCategories() {
+    public List<CategoryDto> getAllCategories() {
         return categoryService.getAllCategories();
-
+    }
+    @GetMapping("/{id}")
+    public CategoryDto getCategoryById(@PathVariable Long id) {
+        return categoryService.getCategoryById(id);
     }
 
     @GetMapping("/category-count")
     public Long getCategoryCount() {return categoryService.getCategoryCount();}
 
-    @GetMapping("/category-names")
-    public ResponseEntity<List<String>> getCategoryNames() {
-        List<Category> category =  categoryService.getAllCategories();
-        List<String> categoryNames = category.stream()  //gets the names of
-                // the book and puts them in a list
-                .map(Category::getCategoryName)
-                .toList();
-        return ResponseEntity.ok(categoryNames);
+
+    @PostMapping
+    public CategoryDto addCategory(@RequestBody CategoryDto categoryDTO) {
+        return categoryService.addCategory(categoryDTO);
     }
-    @PostMapping("/add")
-    public Category addCategory(@RequestBody Category category) {
-        return categoryService.addCategory(category);
+
+    @PutMapping("/{id}")
+    public CategoryDto updateCategory(@PathVariable Long id, @RequestBody CategoryDto categoryDTO) {
+        return categoryService.updateCategory(id, categoryDTO);
     }
 
     @DeleteMapping("/{id}")

@@ -1,7 +1,11 @@
 package guru.springframework.Spring5webApp.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -11,36 +15,34 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 @Entity(name = "book")
 public class Book {
 
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @EqualsAndHashCode.Include
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotNull
+    @NotBlank
     private String Bookname;
+
     private String isbn;
+
     @ManyToOne
     private Publisher publisher;
 
     @ManyToOne
-    @JoinTable(name = "author_book", joinColumns =
-    @JoinColumn(name = "book_id"), inverseJoinColumns =
-    @JoinColumn(name = "author_id"))
     private Author author ;
-    @ManyToMany
-    @JoinTable(name = "book_category",joinColumns = @JoinColumn(name = "book_id" )
-            ,inverseJoinColumns = @JoinColumn(name = "category"))
-    private Set<Category> category= new HashSet<>();
+
+    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    private Category category;
 
 
-    public Book(String bookname, String isbn) {
-        this.Bookname = bookname;
-        this.isbn = isbn;
-
+    public Book(String bookOfIce, String number) {
+        this.Bookname = bookOfIce;
+        this.isbn = number;
     }
-
-
 }

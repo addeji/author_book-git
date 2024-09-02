@@ -1,8 +1,8 @@
 package guru.springframework.Spring5webApp.Controllers;
 
 import guru.springframework.Spring5webApp.Dto.AuthorDto;
+import guru.springframework.Spring5webApp.Dto.BookDto;
 import guru.springframework.Spring5webApp.domain.Author;
-import guru.springframework.Spring5webApp.repositories.AuthorRepository;
 import guru.springframework.Spring5webApp.services.AuthorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +24,8 @@ public class AuthorController {
 
 
     @GetMapping
-    public List<Author> getAllAuthors() {
+    public List<AuthorDto> getAllAuthors() {
+
         return authorService.getAllAuthors();
     }
 
@@ -35,27 +36,28 @@ public class AuthorController {
     }
 
     @PostMapping("/add-author")
-    public ResponseEntity<Author> addAuthor(@RequestBody Author author) {
-        Author newAuthor = authorService.addAuthor(author);
-        return ResponseEntity.ok(newAuthor);
+    public AuthorDto createAuthor(@RequestBody AuthorDto authorDTO) {
+        return authorService.addAuthor(authorDTO);
     }
 
     @PutMapping("/{id}")
-    public Author editAuthorName(@PathVariable Long id, Author author) {
-        return authorService.editAuthorName(id, author.getAuthorName());
+    public AuthorDto editAuthorName(@PathVariable Long id, AuthorDto authorDto) {
+            return authorService.editAuthorName(id, authorDto);
+
     }
 
-    @GetMapping("/authors-ID/{id}")
-    public ResponseEntity<AuthorDto> getAuthorById(@PathVariable Long id) {
-        Author author = authorService.getAuthorById(id);
-        if (author == null) {return ResponseEntity.notFound().build();}
 
-        AuthorDto authorDto = new AuthorDto(author.getId(), author.getAuthorName());
-        authorDto.setBooks(author.getBooks());
 
-        return ResponseEntity.ok(authorDto);
-    }
-
+//    @GetMapping("/authors-ID/{id}")
+//    public ResponseEntity<AuthorDto> getAuthorById(@PathVariable Long id) {
+//        AuthorDto author = authorService.getAuthorById(id);
+//        if (author == null) {return ResponseEntity.notFound().build();}
+//
+//        AuthorDto authorDto = new AuthorDto(author.getId(), author.getAuthorName());
+//        authorDto.setBooks(author.getBooks());
+//
+//        return ResponseEntity.ok(authorDto);
+//    }
 
 
 }

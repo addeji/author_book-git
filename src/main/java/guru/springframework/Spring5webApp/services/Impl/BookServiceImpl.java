@@ -1,46 +1,64 @@
 package guru.springframework.Spring5webApp.services.Impl;
 
-import guru.springframework.Spring5webApp.domain.Author;
+import guru.springframework.Spring5webApp.Dto.AuthorDto;
+import guru.springframework.Spring5webApp.Dto.BookDto;
 import guru.springframework.Spring5webApp.domain.Book;
-
+import guru.springframework.Spring5webApp.mappers.AuthorMapper;
+import guru.springframework.Spring5webApp.mappers.BookMapper;
+import guru.springframework.Spring5webApp.mappers.CategoryMapper;
+import guru.springframework.Spring5webApp.mappers.PublisherMapper;
+import guru.springframework.Spring5webApp.repositories.AuthorRepository;
 import guru.springframework.Spring5webApp.repositories.BookRepository;
+import guru.springframework.Spring5webApp.repositories.CategoryRepository;
+import guru.springframework.Spring5webApp.repositories.PublisherRepository;
 import guru.springframework.Spring5webApp.services.BookService;
-import guru.springframework.Spring5webApp.services.PublisherService;
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class BookServiceImpl implements BookService {
-    @Autowired
-    private BookRepository bookRepository;
-    private PublisherService publisherService;
+
+    private final BookRepository bookRepository;
+
+
+    private  BookMapper mapper;
+
+    private  AuthorMapper authorMapper;
+
+    private  PublisherMapper publisherMapper;
+
+    private  CategoryMapper categoryMapper;
 
     @Override
-    public List<Book> getAllBooks() {
-        List<Book> bookNames =  bookRepository.findAll();
-        log.info("get all books");
-        return ResponseEntity.ok(bookNames).getBody();
+    public List<BookDto> getAllBooks() {
+        log.info("getAllBooks");
+        List<Book> book = bookRepository.findAll();
+        return book.stream()
+                .map(mapper::booktobookDto)
+                .collect(Collectors.toList());
     }
+
     @Override
-    public Book addBook(Book book , Author author) {
-        log.info("add book{}author{}", book, author);
-
-        Book savedBook = bookRepository.save(book);
-        savedBook.setAuthor(author);
-        author.getBooks().add(savedBook);
-        return savedBook;
-
+    public BookDto addBook(BookDto dto) {
+        log.info("Adding new book: {}", dto);
+        Book book = mapper.boookDtoToBook(dto);
+         bookRepository.save(book);
+        return mapper.booktobookDto(book);
     }
 
-    @Override
-    public Book GetBookById(Long id) {
-        return bookRepository.findById(id).orElse(null);
 
+
+    @Override
+    public BookDto getBookById(Long id) {
+        log.info("getBookById");
+        Book book = bookRepository.findById(id).orElseThrow();
+        return mapper.booktobookDto(book);
     }
 
     @Override
@@ -49,10 +67,15 @@ public class BookServiceImpl implements BookService {
         bookRepository.deleteById(id);
     }
     @Override
-    public Book editBookName(Long bookId, String newName) {
-        Book book = bookRepository.findById(bookId).orElseThrow();
-        book.setBookname(newName);
-        log.info("book edited{}", book);
-        return bookRepository.save(book);
+    public BookDto editBook(Long id, BookDto dto) {
+        log.info("edit book{}", id);
+        Book book = bookRepository.findById(id).orElseThrow();
+        book.setBookname(dto.getBookname());
+        book.setIsbn(dto.getIsbn());
+        book.setAuthor(authorMapper.AuthorDtoToAuthor(dto.getAuthor()));
+        book.setPublisher(publisherMapper.publisherDtoToPublisher(dto.getPublisher()));
+        book.setCategory(categoryMapper.categoryDtoToCategory(dto.getCategory()));
+        bookRepository.save(book);
+        return mapper.booktobookDto(book);
     }
 }
