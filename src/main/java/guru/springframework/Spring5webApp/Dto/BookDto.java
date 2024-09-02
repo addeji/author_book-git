@@ -16,9 +16,9 @@ public class BookDto {
     private Long id;
     private String Bookname;
     private String isbn;
-    private Publisher publisher;
+    private String publisher;
     private Author author ;
-    private Set<Category> category= new HashSet<>();
+    private Set<String> category= new HashSet<>();
 
 
 

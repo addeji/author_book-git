@@ -7,6 +7,8 @@ import java.util.List;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class AuthorDto {
     private Long id;
     private String AuthorName;

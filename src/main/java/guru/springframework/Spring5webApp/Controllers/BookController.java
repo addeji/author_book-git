@@ -8,6 +8,7 @@ import guru.springframework.Spring5webApp.services.BookService;
 import lombok.RequiredArgsConstructor;
 
 
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,11 +25,7 @@ public class BookController {
 
 
     @GetMapping
-    public List<Book> getAllBooks() {
-        return bookService.getAllBooks();
-
-
-    }
+    public List<Book> getAllBooks() {return bookService.getAllBooks();}
     @GetMapping("/books/{id}")
     public ResponseEntity<BookDto> getBookById(@PathVariable Long id) {
         Book book = bookService.GetBookById(id);
@@ -43,9 +40,21 @@ public class BookController {
     }
 
     @PostMapping
-    public Book addBook(@RequestBody Book book , Author author) {
+    public Book addBook(@RequestBody BookDto bookDto ){
+            Book book = new Book();
+            book.setBookname(bookDto.getBookname());
+            book.setIsbn(bookDto.getIsbn());
+            book.setAuthor(bookDto.getAuthor());
 
-        return bookService.addBook(book ,author);
+            return bookService.addBook(book , bookDto.getAuthor());
+
+    }
+    @PostMapping("/categoryId/{categoryId}")
+    public ResponseEntity<BookDto> addCategoryToBook(@RequestBody BookDto bookDto,
+              @PathVariable("categoryId")Long categoryId ) {
+       return new
+               ResponseEntity<BookDto>(bookService.addCategoryToBook(bookDto, categoryId)
+               ,HttpStatusCode.valueOf(200));
     }
 
     @DeleteMapping("{id}")

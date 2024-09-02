@@ -1,8 +1,8 @@
 package guru.springframework.Spring5webApp.Controllers;
 
 import guru.springframework.Spring5webApp.Dto.AuthorDto;
+import guru.springframework.Spring5webApp.Dto.BookDto;
 import guru.springframework.Spring5webApp.domain.Author;
-import guru.springframework.Spring5webApp.repositories.AuthorRepository;
 import guru.springframework.Spring5webApp.services.AuthorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -55,7 +55,14 @@ public class AuthorController {
 
         return ResponseEntity.ok(authorDto);
     }
+    @PostMapping("/add-author-to-book")
+    public ResponseEntity<Author> addAuthorToBook(@RequestBody BookDto bookDto , Long Id) {
+        Author author =  authorService.addAuthortoBook(Id , bookDto);
+        if (author == null) {return ResponseEntity.notFound().build();}
+        return ResponseEntity.ok(author);
 
+
+    }
 
 
 }

@@ -24,10 +24,9 @@ public class Author {
     private List<Book> books = new ArrayList<>();
 
 
-
-    public Author(String AuthorName) {
-        this.AuthorName = AuthorName;
-    }
+//    public Author(String name) {
+//        this.AuthorName= name;
+//    }
 
     }
 

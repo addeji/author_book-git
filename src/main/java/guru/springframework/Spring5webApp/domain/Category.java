@@ -13,6 +13,7 @@ import java.util.Set;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,8 +24,5 @@ public class Category {
     private Set<Book> books = new HashSet<>();
 
 
-    public Category(String Category) {
-        this.CategoryName = Category;
-    }
 
 }

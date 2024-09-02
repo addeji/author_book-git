@@ -5,19 +5,19 @@ import guru.springframework.Spring5webApp.domain.Book;
 import guru.springframework.Spring5webApp.domain.Publisher;
 import guru.springframework.Spring5webApp.repositories.PublisherRepository;
 import guru.springframework.Spring5webApp.services.PublisherService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class PublisherServiceImpl implements PublisherService {
-    @Autowired
-    private PublisherRepository publisherRepository;
+
+    private final PublisherRepository publisherRepository;
 
 
     @Override
@@ -25,7 +25,6 @@ public class PublisherServiceImpl implements PublisherService {
         List<Publisher> publishers =  publisherRepository.findAll();
         log.info("get all books");
         return ResponseEntity.ok(publishers).getBody();
-
     }
 
     @Override
@@ -33,6 +32,8 @@ public class PublisherServiceImpl implements PublisherService {
         log.info("addedPublisher{}", publisher);
         Publisher savedPub = publisherRepository.save(publisher);
         book.setPublisher(savedPub);
+        publisher.getBooks().add(book);
+
         return savedPub;
     }
 
@@ -43,7 +44,7 @@ public class PublisherServiceImpl implements PublisherService {
 
     @Override
     public void deletePublisher(Long id) {
-        log.info("delete book" + id);
+        log.info("delete book{}", id);
         publisherRepository.deleteById(id);
     }
 }

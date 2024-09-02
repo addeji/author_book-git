@@ -11,6 +11,7 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 @Entity(name = "book")
 public class Book {
 
@@ -22,6 +23,7 @@ public class Book {
     private Long id;
     private String Bookname;
     private String isbn;
+
     @ManyToOne
     private Publisher publisher;
 
