@@ -21,6 +21,8 @@ public class Publisher {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private Long id;
+
+
     private String PublisherName;
     private String addressline;
     private String city;
